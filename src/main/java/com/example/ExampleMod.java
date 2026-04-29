@@ -15,7 +15,6 @@ public class ExampleMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        // Sağ Shift ile menü bildirimi
         menuKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.nikaxrox.menu", 
                 InputUtil.Type.KEYSYM, 
@@ -26,13 +25,13 @@ public class ExampleMod implements ModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.player != null) {
                 while (menuKey.wasPressed()) {
-                    client.player.sendMessage(Text.literal("§6[Nikaxrox-hub] §fMod Aktif!"), false);
+                    client.player.sendMessage(Text.literal("§6[Nikaxrox-hub] §fPanel Aktif!"), false);
                 }
                 
-                // E tuşu ile Reach (20 blok sınır)
                 if (InputUtil.isKeyPressed(client.getWindow().getHandle(), GLFW.GLFW_KEY_E)) {
                     if (reachDistance < 20.0) {
                         reachDistance += 0.1;
+                        client.player.sendMessage(Text.literal("§bReach: " + String.format("%.1f", reachDistance)), true);
                     }
                 }
             }
